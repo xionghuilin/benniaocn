@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.cms.dao.CompanyInfoDao">
+    
+	<sql id="companyInfoColumns">
+		a.id AS "id",
+		a.logo AS "logo",
+		a.name AS "name",
+		a.short_name AS "shortName",
+		a.website AS "website",
+		a.shop AS "shop",
+		a.description AS "description",
+		a.address AS "address",
+		a.post AS "post",
+		a.tel AS "tel",
+		a.fax AS "fax",
+		a.mail AS "mail",
+		a.map AS "map",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy.id",
+		a.remarks AS "remarks"
+	</sql>
+	
+	<sql id="companyInfoJoins">
+	</sql>
+    
+	<select id="get" resultType="CompanyInfo">
+		SELECT 
+			<include refid="companyInfoColumns"/>
+		FROM cms_company_info a
+		<include refid="companyInfoJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="CompanyInfo">
+		SELECT 
+			<include refid="companyInfoColumns"/>
+		FROM cms_company_info a
+		<include refid="companyInfoJoins"/>
+		<where>
+			
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="CompanyInfo">
+		SELECT 
+			<include refid="companyInfoColumns"/>
+		FROM cms_company_info a
+		<include refid="companyInfoJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO cms_company_info(
+			id,
+			logo,
+			name,
+			short_name,
+			website,
+			shop,
+			description,
+			address,
+			post,
+			tel,
+			fax,
+			mail,
+			map,
+			create_date,
+			create_by,
+			update_date,
+			update_by,
+			remarks
+		) VALUES (
+			#{id},
+			#{logo},
+			#{name},
+			#{shortName},
+			#{website},
+			#{shop},
+			#{description},
+			#{address},
+			#{post},
+			#{tel},
+			#{fax},
+			#{mail},
+			#{map},
+			#{createDate},
+			#{createBy.id},
+			#{updateDate},
+			#{updateBy.id},
+			#{remarks}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE cms_company_info SET 	
+			logo = #{logo},
+			name = #{name},
+			short_name = #{shortName},
+			website = #{website},
+			shop = #{shop},
+			description = #{description},
+			address = #{address},
+			post = #{post},
+			tel = #{tel},
+			fax = #{fax},
+			mail = #{mail},
+			map = #{map},
+			update_date = #{updateDate},
+			update_by = #{updateBy.id},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM cms_company_info
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
