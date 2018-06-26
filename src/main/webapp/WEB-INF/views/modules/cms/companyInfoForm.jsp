@@ -27,16 +27,16 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/cms/companyInfo/">公司信息列表</a></li>
-		<li class="active"><a href="${ctx}/cms/companyInfo/form?id=${companyInfo.id}">公司信息<shiro:hasPermission name="cms:companyInfo:edit">${not empty companyInfo.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="cms:companyInfo:edit">查看</shiro:lacksPermission></a></li>
-	</ul><br/>
-	<form:form id="inputForm" modelAttribute="companyInfo" action="${ctx}/cms/companyInfo/save" method="post" class="form-horizontal">
+		<li class="active"><a href="${ctx}/cms/companyInfo/">公司简介</a></li>
+    </ul><br/>
+	<form:form id="inputForm" modelAttribute="companyInfo" action="${ctx}/cms/companyInfo/info" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">
-			<label class="control-label">公司logo：</label>
+			<label class="control-label">logo：</label>
 			<div class="controls">
-				<form:input path="logo" htmlEscape="false" maxlength="255" class="input-xlarge "/>
+                <form:hidden id="logo" path="logo" htmlEscape="false" maxlength="255" class="input-xlarge"/>
+                <sys:ckfinder input="logo" type="images" uploadPath="/logo" selectMultiple="false" maxWidth="100" maxHeight="100"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -112,8 +112,7 @@
 			</div>
 		</div>
 		<div class="form-actions">
-			<shiro:hasPermission name="cms:companyInfo:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
-			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
+			<input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;
 		</div>
 	</form:form>
 </body>

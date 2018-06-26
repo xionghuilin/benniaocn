@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.cms.dao.PartnerDao">
+    
+	<sql id="partnerColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.link AS "link",
+		a.logo AS "logo",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy.id",
+		a.remarks AS "remarks"
+	</sql>
+	
+	<sql id="partnerJoins">
+	</sql>
+    
+	<select id="get" resultType="Partner">
+		SELECT 
+			<include refid="partnerColumns"/>
+		FROM cms_partner a
+		<include refid="partnerJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Partner">
+		SELECT 
+			<include refid="partnerColumns"/>
+		FROM cms_partner a
+		<include refid="partnerJoins"/>
+		<where>
+			
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="link != null and link != ''">
+				AND a.link = #{link}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Partner">
+		SELECT 
+			<include refid="partnerColumns"/>
+		FROM cms_partner a
+		<include refid="partnerJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO cms_partner(
+			id,
+			name,
+			link,
+			logo,
+			create_date,
+			create_by,
+			update_date,
+			update_by,
+			remarks
+		) VALUES (
+			#{id},
+			#{name},
+			#{link},
+			#{logo},
+			#{createDate},
+			#{createBy.id},
+			#{updateDate},
+			#{updateBy.id},
+			#{remarks}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE cms_partner SET 	
+			name = #{name},
+			link = #{link},
+			logo = #{logo},
+			update_date = #{updateDate},
+			update_by = #{updateBy.id},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM cms_partner
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
