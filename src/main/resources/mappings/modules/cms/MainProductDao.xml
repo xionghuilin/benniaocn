@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.cms.dao.MainProductDao">
+    
+	<sql id="mainProductColumns">
+		a.id AS "id",
+		a.image AS "image",
+		a.title_zh AS "titleZh",
+		a.title_us AS "titleUs",
+		a.intro AS "intro",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy.id",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="mainProductJoins">
+	</sql>
+    
+	<select id="get" resultType="MainProduct">
+		SELECT 
+			<include refid="mainProductColumns"/>
+		FROM cms_main_product a
+		<include refid="mainProductJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="MainProduct">
+		SELECT 
+			<include refid="mainProductColumns"/>
+		FROM cms_main_product a
+		<include refid="mainProductJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="titleZh != null and titleZh != ''">
+				AND a.title_zh LIKE 
+					<if test="dbName == 'oracle'">'%'||#{titleZh}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{titleZh}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{titleZh},'%')</if>
+			</if>
+			<if test="titleUs != null and titleUs != ''">
+				AND a.title_us LIKE 
+					<if test="dbName == 'oracle'">'%'||#{titleUs}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{titleUs}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{titleUs},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="MainProduct">
+		SELECT 
+			<include refid="mainProductColumns"/>
+		FROM cms_main_product a
+		<include refid="mainProductJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO cms_main_product(
+			id,
+			image,
+			title_zh,
+			title_us,
+			intro,
+			create_date,
+			create_by,
+			update_date,
+			update_by,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{image},
+			#{titleZh},
+			#{titleUs},
+			#{intro},
+			#{createDate},
+			#{createBy.id},
+			#{updateDate},
+			#{updateBy.id},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE cms_main_product SET 	
+			image = #{image},
+			title_zh = #{titleZh},
+			title_us = #{titleUs},
+			intro = #{intro},
+			update_date = #{updateDate},
+			update_by = #{updateBy.id},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE cms_main_product SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
