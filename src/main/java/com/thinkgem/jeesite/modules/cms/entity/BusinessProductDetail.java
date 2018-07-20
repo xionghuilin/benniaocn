@@ -18,7 +18,7 @@ public class BusinessProductDetail extends DataEntity<BusinessProductDetail> {
 	private String title;		// 标题
 	private String content;		// 内容
 	private String status;		// 状态
-	private BusinessProductHead productId;		// 经营产品主表id 父类
+	private BusinessProductHead product;		// 经营产品主表id 父类
 	
 	public BusinessProductDetail() {
 		super();
@@ -29,7 +29,7 @@ public class BusinessProductDetail extends DataEntity<BusinessProductDetail> {
 	}
 
 	public BusinessProductDetail(BusinessProductHead productId){
-		this.productId = productId;
+		this.product = product;
 	}
 
 	@Length(min=0, max=255, message="标题长度必须介于 0 和 255 之间")
@@ -59,12 +59,12 @@ public class BusinessProductDetail extends DataEntity<BusinessProductDetail> {
 	}
 	
 	@Length(min=1, max=64, message="经营产品主表id长度必须介于 1 和 64 之间")
-	public BusinessProductHead getProductId() {
-		return productId;
+	public BusinessProductHead getProduct() {
+		return product;
 	}
 
-	public void setProductId(BusinessProductHead productId) {
-		this.productId = productId;
+	public void setProduct(BusinessProductHead product) {
+		this.product = product;
 	}
 	
 }

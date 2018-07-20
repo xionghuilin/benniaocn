@@ -110,8 +110,8 @@
 								<textarea id="businessProductDetailList{{idx}}_content" name="businessProductDetailList[{{idx}}].content" rows="4" class="input-xlarge ">{{row.content}}</textarea>
 							</td>
 							<td>
-								<span><input id="businessProductDetailList{{idx}}_status1" name="businessProductDetailList[{{idx}}].status" class="required" type="radio" value="1"><label for="businessProductDetailList{{idx}}_status1">上线</label></span>
-								<span><input id="businessProductDetailList{{idx}}_status2" name="businessProductDetailList[{{idx}}].status" class="required" type="radio" value="0"><label for="businessProductDetailList{{idx}}_status2">下线</label></span>
+								<span><input id="businessProductDetailList{{idx}}_status1" name="businessProductDetailList[{{idx}}].status" class="required" type="radio" value="1" data-value="{{row.status}}"><label for="businessProductDetailList{{idx}}_status1">上线</label></span>
+								<span><input id="businessProductDetailList{{idx}}_status2" name="businessProductDetailList[{{idx}}].status" class="required" type="radio" value="0" data-value="{{row.status}}"><label for="businessProductDetailList{{idx}}_status2">下线</label></span>
 								<span class="help-inline"><font color="red">*</font> </span>
 							</td>
 							<shiro:hasPermission name="cms:businessProductHead:edit"><td class="text-center" width="10">

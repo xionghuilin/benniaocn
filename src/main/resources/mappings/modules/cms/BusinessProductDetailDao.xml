@@ -7,7 +7,7 @@
 		a.title AS "title",
 		a.content AS "content",
 		a.status AS "status",
-		a.product_id AS "productId",
+		a.product_id AS "product.id",
 		a.create_date AS "createDate",
 		a.create_by AS "createBy.id",
 		a.update_date AS "updateDate",
@@ -41,8 +41,8 @@
 					<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{title},'%')</if>
 			</if>
-			<if test="productId != null and productId != ''">
-				AND a.product_id = #{productId}
+			<if test="product != null and product.id != null and product.id != ''">
+				AND a.product_id = #{product.id}
 			</if>
 		</where>
 		<choose>
@@ -91,7 +91,7 @@
 			#{title},
 			#{content},
 			#{status},
-			#{productId},
+			#{product.id},
 			#{createDate},
 			#{createBy.id},
 			#{updateDate},
@@ -106,7 +106,7 @@
 			title = #{title},
 			content = #{content},
 			status = #{status},
-			product_id = #{productId},
+			product_id = #{product.id},
 			update_date = #{updateDate},
 			update_by = #{updateBy.id},
 			remarks = #{remarks}

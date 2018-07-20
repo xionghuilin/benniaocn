@@ -25,6 +25,9 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
+			<li><label>标题：</label>
+				<form:input path="content" htmlEscape="false" maxlength="255" class="input-medium"/>
+			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
@@ -33,8 +36,8 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
+				<th>标题</th>
 				<th>更新时间</th>
-				<th>备注</th>
 				<shiro:hasPermission name="cms:businessProductHead:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -42,10 +45,10 @@
 		<c:forEach items="${page.list}" var="businessProductHead">
 			<tr>
 				<td><a href="${ctx}/cms/businessProductHead/form?id=${businessProductHead.id}">
-					<fmt:formatDate value="${businessProductHead.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+						${businessProductHead.content}
 				</a></td>
 				<td>
-					${businessProductHead.remarks}
+					<fmt:formatDate value="${businessProductHead.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<shiro:hasPermission name="cms:businessProductHead:edit"><td>
     				<a href="${ctx}/cms/businessProductHead/form?id=${businessProductHead.id}">修改</a>

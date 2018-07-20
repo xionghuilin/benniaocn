@@ -52,7 +52,7 @@ public class BusinessProductHeadService extends CrudService<BusinessProductHeadD
 			}
 			if (BusinessProductDetail.DEL_FLAG_NORMAL.equals(businessProductDetail.getDelFlag())){
 				if (StringUtils.isBlank(businessProductDetail.getId())){
-					businessProductDetail.setProductId(businessProductHead);
+					businessProductDetail.setProduct(businessProductHead);
 					businessProductDetail.preInsert();
 					businessProductDetailDao.insert(businessProductDetail);
 				}else{

@@ -32,6 +32,9 @@
 		<include refid="businessProductHeadJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test=" content != null and content != ''">
+				AND a.content like CONCAT('%,', #{content}, ',%')
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
