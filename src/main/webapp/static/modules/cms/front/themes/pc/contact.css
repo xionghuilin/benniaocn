@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+
+.introCompany,.aboutMap{
+	width:50%;
+	float:left;
+}
+.company{
+	font-size:20px;
+	color:#005EA8;
+}

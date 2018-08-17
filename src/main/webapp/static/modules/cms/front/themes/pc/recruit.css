@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+.recruitbox{
+	width:100%;
+    float: left;
+	background-color:#F8F8F8;
+}
+.recruitLeft{
+	width:70%;
+	float:left;
+    margin-bottom: 40px;
+}
+.recruitmentTit{
+	cursor: pointer;
+	padding: 10px 0;
+	border-bottom:1px dashed #DADADA;
+}
+.recruitmentCon{
+	width:100%;
+	padding: 20px 0;
+	display: none;
+	border-bottom:1px dashed #DADADA;
+}
+.recruitTxt{
+
+}
+.recruitRihgt{
+	width:30%;
+	float:left;
+}
+.recruitRihgt img{
+	float:right;
+}

@@ -16,6 +16,7 @@ public class ServiceAdvantage extends DataEntity<ServiceAdvantage> {
 	
 	private static final long serialVersionUID = 1L;
 	private String title;		// 标题
+	private String preImage;
 	
 	public ServiceAdvantage() {
 		super();
@@ -33,5 +34,12 @@ public class ServiceAdvantage extends DataEntity<ServiceAdvantage> {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
+	public String getPreImage() {
+		return preImage;
+	}
+
+	public void setPreImage(String preImage) {
+		this.preImage = preImage;
+	}
 }

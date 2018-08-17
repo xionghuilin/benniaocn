@@ -3,6 +3,8 @@
  */
 package com.thinkgem.jeesite.modules.cms.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -44,7 +46,12 @@ public class CompanyInfoController extends BaseController {
             entity = companyInfoService.get(id);
         }
         if (entity == null) {
-            entity = new CompanyInfo();
+            List<CompanyInfo> companyInfoList = companyInfoService.findList(new CompanyInfo());
+            if(companyInfoList.isEmpty()){
+                entity = new CompanyInfo();
+            }else{
+                entity = companyInfoList.get(0);
+            }
         }
         return entity;
     }

@@ -95,7 +95,8 @@
 			create_by,
 			update_date,
 			update_by,
-			remarks
+			remarks,
+			del_flag
 		) VALUES (
 			#{id},
 			#{logo},
@@ -114,7 +115,8 @@
 			#{createBy.id},
 			#{updateDate},
 			#{updateBy.id},
-			#{remarks}
+			#{remarks},
+			#{delFlag}
 		)
 	</insert>
 	

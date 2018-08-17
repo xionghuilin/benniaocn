@@ -41,6 +41,13 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<label class="control-label">前缀logo：</label>
+			<div class="controls">
+				<input type="hidden" id="preImage" name="preImage" value="${serviceAdvantage.preImage}"/>
+				<sys:ckfinder input="preImage" type="images" uploadPath="/cms/serviceAdvantage" selectMultiple="false"/>
+			</div>
+		</div>
+		<div class="control-group">
 			<label class="control-label">简介：</label>
 			<div class="controls">
 				<form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="255" class="input-xxlarge "/>

@@ -11,7 +11,8 @@
 		a.create_by AS "createBy.id",
 		a.update_date AS "updateDate",
 		a.update_by AS "updateBy.id",
-		a.remarks AS "remarks"
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
 	</sql>
 	
 	<sql id="partnerJoins">
@@ -80,7 +81,8 @@
 			create_by,
 			update_date,
 			update_by,
-			remarks
+			remarks,
+			del_flag
 		) VALUES (
 			#{id},
 			#{name},
@@ -90,7 +92,8 @@
 			#{createBy.id},
 			#{updateDate},
 			#{updateBy.id},
-			#{remarks}
+			#{remarks},
+			#{delFlag}
 		)
 	</insert>
 	

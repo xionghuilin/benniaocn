@@ -5,11 +5,13 @@
 	<sql id="serviceAdvantageColumns">
 		a.id AS "id",
 		a.title AS "title",
+		a.pre_image AS "preImage",
 		a.create_date AS "createDate",
 		a.create_by AS "createBy.id",
 		a.update_date AS "updateDate",
 		a.update_by AS "updateBy.id",
-		a.remarks AS "remarks"
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
 	</sql>
 	
 	<sql id="serviceAdvantageJoins">
@@ -69,25 +71,30 @@
 		INSERT INTO cms_service_advantage(
 			id,
 			title,
+			pre_image,
 			create_date,
 			create_by,
 			update_date,
 			update_by,
-			remarks
+			remarks,
+			del_flag
 		) VALUES (
 			#{id},
 			#{title},
+			#{preImage},
 			#{createDate},
 			#{createBy.id},
 			#{updateDate},
 			#{updateBy.id},
-			#{remarks}
+			#{remarks},
+			#{delFlag}
 		)
 	</insert>
 	
 	<update id="update">
 		UPDATE cms_service_advantage SET 	
 			title = #{title},
+			pre_image = #{preImage},
 			update_date = #{updateDate},
 			update_by = #{updateBy.id},
 			remarks = #{remarks}

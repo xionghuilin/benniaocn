@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+#wrap {
+    margin: 20px auto;
+}
+#tit {
+	width: 100%;
+	height: 30px;
+}
+#tit span {
+	float: left;
+	padding:6px 20px;
+	border-radius:4px;
+	text-align: center;
+	margin:0 10px;
+	background: #EAEAEA;
+	cursor:pointer;
+}
+#tit span.select {
+	background: #005EA8;
+	color: white;
+}
+#con {
+    margin: 40px 0;
+}
+#con .box{
+	display: none;
+}
+.box img{
+	width:32%;
+	margin-bottom:20px;
+}
+.boxShowImg{
+	margin-right:1%;
+}
+#con .box.show {display: block;}

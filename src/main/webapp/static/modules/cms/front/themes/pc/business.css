@@ -1,0 +1,74 @@
+@CHARSET "UTF-8";
+
+.businessCenter .h_center{
+	width:78%;
+	background-color:white;
+	overflow: hidden;
+	padding:0 30px;
+	border:2px solid #F0F0F0;
+}
+.webTypes{
+	padding:20px 0;
+	border-bottom:2px solid #F6F6F6;
+}
+.webType{
+	color:white;
+	padding:7px 20px;
+	margin:0 10px;
+	border-radius:4px;
+}
+.webTA{
+	background-color:#969426;
+}
+.webTB{
+	background-color:#68C3DE;
+}
+.webTC{
+	background-color:#88B797;
+}
+.webTD{
+	background-color:#7F8C8C;
+}
+.typesCon{
+	padding:20px 0;
+}
+.webTypeTit{
+
+}
+.webTypeCon{
+    background-color: #EFEFEF;
+}
+.namesVersion{
+	width:20%;
+	text-align:center;
+	color:white;
+	background-color:#19ADC9;
+}
+.namesPrice{
+	 width:30%;
+     text-indent: 15px;
+}
+.nameFunction{
+	width:50%;
+	border-left:1px solid white;
+    padding-left: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

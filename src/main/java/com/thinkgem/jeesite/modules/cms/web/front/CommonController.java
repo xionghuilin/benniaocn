@@ -12,6 +12,7 @@ import com.thinkgem.jeesite.modules.cms.service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -60,38 +61,53 @@ public class CommonController extends BaseController {
     private ProductCaseService productCaseService;
 
     /**
-     * 轮播图
+     * 关于我们
      */
-    @RequestMapping(value = "slide", method = RequestMethod.GET)
-    @ResponseBody
-    public WebResponse<List<Ad>> slide() {
-        WebResponse<List<Ad>> webResponse = new WebResponse<List<Ad>>();
-        // 获取在线的幻灯片
+    @RequestMapping(value = "aboutUs", method = RequestMethod.GET)
+    public String aboutUs(Model model) {
+        CompanyInfo companyInfo = new CompanyInfo();
+        CompanyInfo param = new CompanyInfo();
+        List<CompanyInfo> list = companyInfoService.findList(param);
+        if (!list.isEmpty()) {
+            companyInfo = list.get(0);
+        }
         Ad adParam = new Ad();
-        adParam.setStatus("1");
         List<Ad> adList = adService.findList(adParam);
-        webResponse.setBody(adList);
-        webResponse.setMessage("成功");
-        return webResponse;
+        Process processParam = new Process();
+        List<Process> processList = processService.findList(processParam);
+        ServiceAdvantage param1 = new ServiceAdvantage();
+        List<ServiceAdvantage> serviceAdvantageList = serviceAdvantageService.findList(param1);
+        model.addAttribute("serviceAdvantageList",serviceAdvantageList);
+        model.addAttribute("ad", adList != null ? adList.get(0) : null);
+        model.addAttribute("companyInfo", companyInfo);
+        model.addAttribute("processList", processList);
+        return "modules/cms/front/themes/pc/aboutUs";
     }
 
     /**
-     * 公司信息介绍
+     * 公司首页
      *
      * @param
      * @return
      */
-    @RequestMapping(value = "companyInfo", method = RequestMethod.GET)
-    @ResponseBody
-    public WebResponse<CompanyInfo> companyInfo() {
-        WebResponse<CompanyInfo> webResponse = new WebResponse<CompanyInfo>();
+    @RequestMapping(value = "index", method = RequestMethod.GET)
+    public String companyInfo(Model model) {
+        CompanyInfo companyInfo = new CompanyInfo();
         CompanyInfo param = new CompanyInfo();
         List<CompanyInfo> list = companyInfoService.findList(param);
         if (!list.isEmpty()) {
-            webResponse.setBody(list.get(0));
+            companyInfo = list.get(0);
         }
-        webResponse.setMessage("成功");
-        return webResponse;
+        Ad adParam = new Ad();
+        adParam.setStatus("1");
+        List<Ad> adList = adService.findList(adParam);
+
+        Partner param1 = new Partner();
+        List<Partner> partnerList = partnerService.findList(param1);
+        model.addAttribute("partnerList", partnerList);
+        model.addAttribute("adList", adList);
+        model.addAttribute("companyInfo", companyInfo);
+        return "modules/cms/front/themes/pc/index";
     }
 
     /**
@@ -100,48 +116,59 @@ public class CommonController extends BaseController {
      * @param
      * @return
      */
-    @RequestMapping(value = "mainProduct")
-    @ResponseBody
-    public WebResponse<List<MainProduct>> mainProduct() {
+    @RequestMapping(value = "business")
+    public String business(Model model) {
         WebResponse<List<MainProduct>> webResponse = new WebResponse<List<MainProduct>>();
         MainProduct param = new MainProduct();
         List<MainProduct> list = mainProductService.findList(param);
         webResponse.setBody(list);
-        return webResponse;
+        return "modules/cms/front/themes/pc/business";
     }
 
     /**
-     * 合作伙伴
+     * 联系我们
      *
      * @param
      * @return
      */
-    @RequestMapping(value = "partner")
-    @ResponseBody
-    public WebResponse<List<Partner>> partner() {
-        WebResponse<List<Partner>> webResponse = new WebResponse<List<Partner>>();
-        Partner param = new Partner();
-        List<Partner> partnerList = partnerService.findList(param);
-        webResponse.setBody(partnerList);
-        webResponse.setMessage("成功");
-        return webResponse;
+    @RequestMapping(value = "contact")
+    public String contact(Model model) {
+        CompanyInfo companyInfo = new CompanyInfo();
+        CompanyInfo param = new CompanyInfo();
+        List<CompanyInfo> list = companyInfoService.findList(param);
+        if (!list.isEmpty()) {
+            companyInfo = list.get(0);
+        }
+        Ad adParam = new Ad();
+        List<Ad> adList = adService.findList(adParam);
+        model.addAttribute("ad", adList != null ? adList.get(0) : null);
+        model.addAttribute("companyInfo",companyInfo);
+        return "modules/cms/front/themes/pc/contact";
     }
 
 
     /**
-     * 企业动态
+     * 招聘信息
      *
      * @param
      * @return
      */
-    @RequestMapping(value = "businessMovement")
-    @ResponseBody
-    public WebResponse<List<BusinessMovement>> businessMovement() {
-        WebResponse<List<BusinessMovement>> webResponse = new WebResponse<List<BusinessMovement>>();
-        BusinessMovement param = new BusinessMovement();
-        List<BusinessMovement> businessMovementList = businessMovementService.findList(param);
-        webResponse.setBody(businessMovementList);
-        return webResponse;
+    @RequestMapping(value = "recruitment")
+    public String businessMovement(Model model) {
+        CompanyInfo companyInfo = new CompanyInfo();
+        CompanyInfo param = new CompanyInfo();
+        List<CompanyInfo> list = companyInfoService.findList(param);
+        if (!list.isEmpty()) {
+            companyInfo = list.get(0);
+        }
+        Position param1 = new Position();
+        List<Position> positionList = positionService.findList(param1);
+        Ad adParam = new Ad();
+        List<Ad> adList = adService.findList(adParam);
+        model.addAttribute("ad", adList != null ? adList.get(0) : null);
+        model.addAttribute("companyInfo",companyInfo);
+        model.addAttribute("positionList",positionList);
+        return "modules/cms/front/themes/pc/recruitment";
     }
 
     /**
@@ -150,14 +177,16 @@ public class CommonController extends BaseController {
      * @param
      * @return
      */
-    @RequestMapping(value = "serviceAdvantage")
+    @RequestMapping(value = "success")
     @ResponseBody
-    public WebResponse<List<ServiceAdvantage>> serviceAdvantage() {
+    public String success(Model model) {
         WebResponse<List<ServiceAdvantage>> webResponse = new WebResponse<List<ServiceAdvantage>>();
         ServiceAdvantage param = new ServiceAdvantage();
         List<ServiceAdvantage> serviceAdvantageList = serviceAdvantageService.findList(param);
+        BusinessMovement param1 = new BusinessMovement();
+        List<BusinessMovement> businessMovementList = businessMovementService.findList(param1);
         webResponse.setBody(serviceAdvantageList);
-        return webResponse;
+        return "modules/cms/front/themes/pc/successDemo";
     }
 
     /**
@@ -254,7 +283,7 @@ public class CommonController extends BaseController {
         WebResponse<Ad> webResponse = new WebResponse<Ad>();
         Ad param = new Ad();
         List<Ad> adList = adService.findList(param);
-        if(!adList.isEmpty()){
+        if (!adList.isEmpty()) {
             webResponse.setBody(adList.get(0));
         }
         return webResponse;

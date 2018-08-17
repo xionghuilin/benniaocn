@@ -41,6 +41,7 @@ public abstract class BaseService {
 		
 		// 进行权限过滤，多个角色权限范围之间为或者关系。
 		List<String> dataScope = Lists.newArrayList();
+
 		
 		// 超级管理员，跳过权限过滤
 		if (!user.isAdmin()){

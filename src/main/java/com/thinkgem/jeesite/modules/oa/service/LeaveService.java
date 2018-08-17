@@ -135,7 +135,7 @@ public class LeaveService extends BaseService {
 
 	public Page<Leave> find(Page<Leave> page, Leave leave) {
 
-		leave.getSqlMap().put("dsf", dataScopeFilter(leave.getCurrentUser(), "o", "u"));
+		leave.getSqlMap().put("", dataScopeFilter(leave.getCurrentUser(), "o", "u"));
 		
 		leave.setPage(page);
 		page.setList(leaveDao.findList(leave));

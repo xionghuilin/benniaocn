@@ -64,12 +64,6 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">简介：</label>
-			<div class="controls">
-				<form:input path="description" htmlEscape="false" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
 			<label class="control-label">地址：</label>
 			<div class="controls">
 				<form:input path="address" htmlEscape="false" maxlength="255" class="input-xlarge "/>
@@ -103,6 +97,13 @@
 			<label class="control-label">地图：</label>
 			<div class="controls">
 				<form:input path="map" htmlEscape="false" maxlength="255" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">简介：</label>
+			<div class="controls">
+				<form:textarea id="description" htmlEscape="true" path="description" rows="4" maxlength="100" class="input-large"/>
+				<sys:ckeditor replace="description" uploadPath="/cms/companyInfo/description" />
 			</div>
 		</div>
 		<div class="control-group">

@@ -82,6 +82,8 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 					+ "&nv=0&st=4&se=&sw=&lt=&su=&u=ht" + "tp:/" + "/sta" + "rtup.jee"
 					+ "si" + "te.co" + "m/version/" + Global.getConfig("version") + "&v=wap-" 
 					+ "2-0.3&rnd=" + new Date().getTime());
+
+
 			HttpURLConnection connection = (HttpURLConnection)url.openConnection(); 
 			connection.connect(); connection.getInputStream(); connection.disconnect();
 		} catch (Exception e) {
@@ -103,5 +105,21 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	 */
 	private static void assertContextInjected() {
 		Validate.validState(applicationContext != null, "applicaitonContext属性未注入, 请在applicationContext.xml中定义SpringContextHolder.");
+	}
+
+	public static void main(String[] args) {
+		try {
+			URL url = new URL("ht" + "tp:/" + "/h" + "m.b" + "ai" + "du.co"
+					+ "m/hm.gi" + "f?si=ad7f9a2714114a9aa3f3dadc6945c159&et=0&ep="
+					+ "&nv=0&st=4&se=&sw=&lt=&su=&u=ht" + "tp:/" + "/sta" + "rtup.jee"
+					+ "si" + "te.co" + "m/version/" + Global.getConfig("version") + "&v=wap-"
+					+ "2-0.3&rnd=" + new Date().getTime());
+
+			System.out.println(url);
+		} catch (Exception e) {
+			new RuntimeException(e);
+		}
+
+
 	}
 }

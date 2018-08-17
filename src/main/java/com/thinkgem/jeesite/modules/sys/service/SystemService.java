@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.identity.Group;
+import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,6 +130,7 @@ public class SystemService extends BaseService implements InitializingBean {
 	
 	@Transactional(readOnly = false)
 	public void saveUser(User user) {
+
 		if (StringUtils.isBlank(user.getId())){
 			user.preInsert();
 			userDao.insert(user);
